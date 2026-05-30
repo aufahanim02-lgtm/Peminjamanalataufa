@@ -14,7 +14,6 @@ use App\Http\Controllers\Auth\PeminjamAuthController;
 
 Route::get('/', [LandingController::class, 'home'])->name('home');
 
-
 /*
 |--------------------------------------------------------------------------
 | AUTH USER (ADMIN + PETUGAS + USER)
@@ -23,15 +22,12 @@ Route::get('/', [LandingController::class, 'home'])->name('home');
 
 Route::middleware('guest')->group(function () {
 
-    // =====================
     // LOGIN USER
-    // =====================
     Route::get('/login-user', [UserAuthController::class, 'showLogin'])
         ->name('login.user');
 
     Route::post('/login-user', [UserAuthController::class, 'login'])
         ->name('login.user.proses');
-
 
     /*
     |--------------------------------------------------------------------------
@@ -39,20 +35,22 @@ Route::middleware('guest')->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/login-peminjam', [PeminjamAuthController::class, 'showLogin'])
+    // TAMPILKAN FORM LOGIN
+    Route::get('/login-peminjam', [PeminjamAuthController::class, 'login'])
         ->name('login.peminjam');
 
-    Route::post('/login-peminjam', [PeminjamAuthController::class, 'login'])
+    // PROSES LOGIN
+    Route::post('/login-peminjam', [PeminjamAuthController::class, 'proses'])
         ->name('login.peminjam.proses');
 
-
-    Route::get('/register-peminjam', [PeminjamAuthController::class, 'showRegister'])
+    // TAMPILKAN FORM REGISTER
+    Route::get('/register-peminjam', [PeminjamAuthController::class, 'register'])
         ->name('register.peminjam');
 
-    Route::post('/register-peminjam', [PeminjamAuthController::class, 'register'])
+    // PROSES REGISTER
+    Route::post('/register-peminjam', [PeminjamAuthController::class, 'store'])
         ->name('register.peminjam.proses');
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +61,6 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [UserAuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +75,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | PETUGAS
@@ -92,10 +88,9 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| USER (DEFAULT LOGIN USER BIASA)
+| USER
 |--------------------------------------------------------------------------
 */
 
@@ -106,14 +101,13 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
 /*
 |--------------------------------------------------------------------------
-| PEMINJAM DASHBOARD
+| PEMINJAM
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'peminjam'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::view('/dashboard-peminjam', 'zonapeminjam.dashboard.peminjam')
         ->name('dashboard.peminjam');

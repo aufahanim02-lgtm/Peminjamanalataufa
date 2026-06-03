@@ -1,118 +1,53 @@
 <!DOCTYPE html>
-
-<html lang="id">
-
+<html lang="en">
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>
+    <title>
+        @yield('title')
+    </title>
 
-@yield('title','Peminjam')
+    <!-- ADMINLTE -->
+    <link rel="stylesheet"
+          href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
-</title>
-
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-rel="stylesheet">
+    <link rel="stylesheet"
+          href="{{ asset('dist/css/adminlte.min.css') }}">
 
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini">
 
-<nav
-class="navbar navbar-dark bg-primary">
+<div class="wrapper">
 
-<div class="container">
+    <!-- NAVBAR -->
+    @include('layouts.peminjam.navbar')
 
-<a
-class="navbar-brand"
-href="#">
+    <!-- SIDEBAR -->
+    @include('layouts.peminjam.sidebar')
 
-Peminjaman Alat
+    <!-- CONTENT -->
+    <div class="content-wrapper p-3">
 
-</a>
+        @yield('content')
 
-<div>
+    </div>
 
-<span
-class="text-white me-3">
-
-{{ auth()->user()->name }}
-
-</span>
-
-<form
-method="POST"
-action="{{ route('logout') }}"
-class="d-inline">
-
-@csrf
-
-<button
-class="btn btn-light">
-
-Logout
-
-</button>
-
-</form>
+    <!-- FOOTER -->
+    @include('layouts.peminjam.footer')
 
 </div>
 
-</div>
+<!-- SCRIPT -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
-</nav>
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<div class="container mt-4">
-
-<div class="row">
-
-<div class="col-md-3">
-
-<div class="list-group">
-
-<a
-href="{{ route('dashboard.peminjam') }}"
-class="list-group-item">
-
-Dashboard
-
-</a>
-
-<a
-href="{{ route('peminjaman.create') }}"
-class="list-group-item">
-
-Ajukan Peminjaman
-
-</a>
-
-<a
-href="{{ route('riwayat.index') }}"
-class="list-group-item">
-
-Riwayat
-
-</a>
-
-</div>
-
-</div>
-
-<div class="col-md-9">
-
-@yield('content')
-
-</div>
-
-</div>
-
-</div>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 </body>
-
 </html>

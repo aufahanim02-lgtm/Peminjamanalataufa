@@ -1,120 +1,68 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>
-@yield('title','Dashboard')
-</title>
+    <title>
+        @yield('title')
+    </title>
 
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-rel="stylesheet">
+    <!-- ADMINLTE -->
+    <link rel="stylesheet"
+          href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
-<style>
-
-body{
-background:#f4f6f9;
-}
-
-.sidebar{
-width:240px;
-height:100vh;
-position:fixed;
-
-background:#212529;
-
-padding:20px;
-}
-
-.sidebar a{
-
-color:white;
-
-display:block;
-
-padding:12px;
-
-text-decoration:none;
-
-}
-
-.sidebar a:hover{
-
-background:#0d6efd;
-
-border-radius:10px;
-
-}
-
-.content{
-
-margin-left:260px;
-
-padding:30px;
-
-}
-
-</style>
+    <link rel="stylesheet"
+          href="{{ asset('dist/css/adminlte.min.css') }}">
 
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini">
 
-<div class="sidebar">
+<div class="wrapper">
 
-<h4 class="text-white">
+    {{-- NAVBAR --}}
+    @include('layouts.user.navbar')
 
-Dashboard
+    {{-- SIDEBAR --}}
+    @if(Auth::check())
 
-</h4>
+        @if(Auth::user()->role == 'admin')
 
-<hr class="text-light">
+            @include('layouts.user.sidebaradmin')
 
-<a href="{{ route('dashboard') }}">
-Dashboard
-</a>
+        @elseif(Auth::user()->role == 'petugas')
 
-<a href="{{ route('alat.index') }}">
-Data Alat
-</a>
+            @include('layouts.user.sidebarpetugas')
 
-<a href="{{ route('peminjaman.index') }}">
-Peminjaman
-</a>
+        @endif
 
-<a href="{{ route('users.index') }}">
-User
-</a>
+    @endif
 
-<form
-action="{{ route('logout') }}"
-method="POST">
+    {{-- CONTENT --}}
+    <div class="content-wrapper">
 
-@csrf
+        @yield('content')
 
-<button
-class="btn btn-danger mt-4 w-100">
+    </div>
 
-Logout
-
-</button>
-
-</form>
+    {{-- FOOTER --}}
+    @include('layouts.user.footer')
 
 </div>
 
-<div class="content">
+<!-- JQUERY -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
-@yield('content')
+<!-- BOOTSTRAP -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-</div>
+<!-- ADMINLTE -->
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 </body>
-
 </html>

@@ -32,9 +32,12 @@ peminjamanalatAufa/
 │   │   │   │   ├── LaporanPengembalianController.php
 │   │   │   │   └── LaporanDendaController.php
 │   │   │   │
-│   │   │   ├── Peminjam/
-│   │   │   │   ├── DashboardController.php
-│   │   │   │   └── PeminjamanController.php
+│   │   │   ├──  Peminjam/
+|   |   |   |  ├── DashboardController.php
+|   |   |   |  ├── AlatController.php
+|   |   |   |  ├── PeminjamanController.php
+|   |   |   |  └── RiwayatController.php
+|   |   |   |
 │   │   │   │
 │   │   │   └── Landing/
 │   │   │       └── LandingController.php

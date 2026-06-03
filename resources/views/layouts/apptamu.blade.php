@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
+
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title','Peminjaman Alat')
+        @yield('title')
     </title>
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <!-- ADMINLTE -->
+    <link rel="stylesheet"
+          href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ asset('dist/css/adminlte.min.css') }}">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
     <style>
 
         body{
-            background:#f5f7fa;
-            min-height:100vh;
+            background:#f4f6f9;
         }
 
-        .navbar{
-            background:#0d6efd;
-        }
+        .hero-section{
+            min-height:90vh;
+            background:
+            linear-gradient(rgba(0,0,0,0.6),
+            rgba(0,0,0,0.6)),
+            url('{{ asset("dist/img/bg-alat.jpg") }}');
 
-        footer{
-            background:#212529;
-            color:white;
-            padding:15px;
+            background-size:cover;
+            background-position:center;
         }
 
     </style>
@@ -39,85 +45,23 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
+    <!-- NAVBAR -->
+    @include('layouts.tamu.navbar')
 
-<div class="container">
+    <!-- CONTENT -->
+    <main>
+        @yield('content')
+    </main>
 
-<a
-class="navbar-brand fw-bold"
-href="{{ url('/') }}">
+    <!-- FOOTER -->
+    @include('layouts.tamu.footer')
 
-Peminjaman Alat
+    <!-- SCRIPT -->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
-</a>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<div class="d-flex gap-2">
-
-<a
-href="{{ route('login.user') }}"
-class="btn btn-light">
-
-Login User
-
-</a>
-
-<a
-href="{{ route('login.peminjam') }}"
-class="btn btn-success">
-
-Login Peminjam
-
-</a>
-
-<a
-href="{{ route('register.peminjam') }}"
-class="btn btn-warning">
-
-Register
-
-</a>
-
-</div>
-
-</div>
-
-</nav>
-
-<div class="container mt-4">
-
-@if(session('error'))
-
-<div class="alert alert-danger">
-
-{{ session('error') }}
-
-</div>
-
-@endif
-
-
-@if(session('success'))
-
-<div class="alert alert-success">
-
-{{ session('success') }}
-
-</div>
-
-@endif
-
-
-@yield('content')
-
-</div>
-
-<footer class="text-center mt-5">
-
-© {{ date('Y') }}
-Sistem Peminjaman Alat
-
-</footer>
+    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
 </body>
-
 </html>
